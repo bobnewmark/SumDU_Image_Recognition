@@ -18,11 +18,11 @@ public class ImageRecognizeApp {
         int[][] img3Matrix = Utils.getMatrixFromFile(img3File);
         int[][] img4Matrix = Utils.getMatrixFromFile(img4File);
 
-        // создаем вектор усредненных значений
-        int[] vector = Calculations.getVectorFromMatrix(img1Matrix);
+        // создаем вектор усредненных значений на основе 3-го кадра
+        int[] vector = Calculations.getVectorFromMatrix(img3Matrix);
         // и вектора верхнего и нижнего допусков
-        int[] upperVector = Arrays.stream(vector).map(operand -> operand + 20).toArray();
-        int[] lowerVector = Arrays.stream(vector).map(operand -> operand - 20).toArray();
+        int[] upperVector = Arrays.stream(vector).map(operand -> operand + 40).toArray();
+        int[] lowerVector = Arrays.stream(vector).map(operand -> operand - 40).toArray();
 
         // получаем бинарные матрицы на основе сравнения с допусками
         int[][] binaryMatrix1 = Calculations.getBinaryMatrix(img1Matrix, upperVector, lowerVector);
