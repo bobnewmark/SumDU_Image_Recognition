@@ -30,4 +30,22 @@ public class Calculations {
         }
         return binaryMatrix;
     }
+
+    public static int[] getDistance(int[] a, int[][] b) {
+        int[] result = new int[a.length];
+
+        for (int i = 0; i < b.length; i++) {
+            int distance = 0;
+            for (int j = 0; j < b[i].length; j++) {
+                if (b[i][j] != a[i]) {
+                    distance++;
+                } else {
+                    distance--;
+                }
+            }
+            result[i] = distance;
+        }
+
+        return result;
+    }
 }
