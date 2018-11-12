@@ -57,7 +57,7 @@ public class ImageRecognizeApp {
         }
 
         System.out.println("Матрица расстояний второго класса от первого, третьего");
-        for (int[] aDist1 : dist1) {
+        for (int[] aDist1 : dist2) {
             for (int anADist1 : aDist1) {
                 System.out.print(anADist1 + " ");
             }
@@ -65,7 +65,7 @@ public class ImageRecognizeApp {
         }
 
         System.out.println("Матрица расстояний третьего класса от второго, первого");
-        for (int[] aDist1 : dist1) {
+        for (int[] aDist1 : dist3) {
             for (int anADist1 : aDist1) {
                 System.out.print(anADist1 + " ");
             }
