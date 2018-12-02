@@ -16,7 +16,6 @@ public class ImageRecognizeApp {
         int[][] img1Matrix = Utils.getMatrixFromFile(img1File);
         int[][] img2Matrix = Utils.getMatrixFromFile(img2File);
         int[][] img3Matrix = Utils.getMatrixFromFile(img3File);
-        int[][] img4Matrix = Utils.getMatrixFromFile(img4File);
 
         // создаем вектор усредненных значений на основе 3-го кадра
         int[] vector = Calculations.getVectorFromMatrix(img3Matrix);
@@ -39,47 +38,39 @@ public class ImageRecognizeApp {
         int [][] dist2 = new int[2][50];
         int [][] dist3 = new int[2][50];
 
-        dist1[0] = Calculations.getDistance(normalizedBinVector1, binaryMatrix2);
-        dist1[1] = Calculations.getDistance(normalizedBinVector1, binaryMatrix3);
+        dist1[0] = Calculations.getDistance(normalizedBinVector1, binaryMatrix1);
+        dist1[1] = Calculations.getDistance(normalizedBinVector1, binaryMatrix2);
 
-        dist2[0] = Calculations.getDistance(normalizedBinVector2, binaryMatrix1);
+        dist2[0] = Calculations.getDistance(normalizedBinVector2, binaryMatrix2);
         dist2[1] = Calculations.getDistance(normalizedBinVector2, binaryMatrix3);
 
-        dist3[0] = Calculations.getDistance(normalizedBinVector3, binaryMatrix2);
+        dist3[0] = Calculations.getDistance(normalizedBinVector3, binaryMatrix3);
         dist3[1] = Calculations.getDistance(normalizedBinVector3, binaryMatrix1);
 
-        System.out.println("Матрица расстояний первого класса от второго, третьего");
-        for (int[] aDist1 : dist1) {
-            for (int anADist1 : aDist1) {
-                System.out.print(anADist1 + " ");
-            }
-            System.out.println();
-        }
+        //получение Е
+        float[] e1 = Calculations.getE(dist1);
+        float[] effectiveE1 = Calculations.getEffectiveE(e1);
+        new Chart("Result 1", e1, effectiveE1);
 
-        System.out.println("Матрица расстояний второго класса от первого, третьего");
-        for (int[] aDist1 : dist2) {
-            for (int anADist1 : aDist1) {
-                System.out.print(anADist1 + " ");
-            }
-            System.out.println();
-        }
+        float[] e2 = Calculations.getE(dist2);
+        float[] effectiveE2 = Calculations.getEffectiveE(e2);
+        new Chart("Result 2", e2, effectiveE2);
 
-        System.out.println("Матрица расстояний третьего класса от второго, первого");
-        for (int[] aDist1 : dist3) {
-            for (int anADist1 : aDist1) {
-                System.out.print(anADist1 + " ");
-            }
-            System.out.println();
-        }
+        float[] e3 = Calculations.getE(dist3);
+        float[] effectiveE3 = Calculations.getEffectiveE(e3);
+        new Chart("Result 3", e3, effectiveE3);
 
-
-
-
-
-
-
+        //єкзамен для 4-го файла
+        int[][] img4Matrix = Utils.getMatrixFromFile(img4File);
+        int[][] binaryMatrix4 = Calculations.getBinaryMatrix(img4Matrix, upperVector, lowerVector);
+        int[] normalizedBinVector4 = Calculations.getVectorFromMatrix(binaryMatrix4);
+        int [][] dist4 = new int[2][50];
+        dist4[0] = Calculations.getDistance(normalizedBinVector4, binaryMatrix4);
+        dist4[1] = Calculations.getDistance(normalizedBinVector4, binaryMatrix1);
+        float[] e4 = Calculations.getE(dist4);
+        float[] effectiveE4 = Calculations.getEffectiveE(e4);
+        new Chart("EXAM", e4, effectiveE4);
 
     }
-
 
 }
